@@ -8,7 +8,7 @@ A primeira atividade consiste na criação de um CRUD, o qual o usuário deve po
 
 Deve ser possível a criação de projetos nesse CRUD, os projetos são objetos JavaScript que devem ter um "id", um "título" e um vetor de atividades dentro dele.
 
-    - POST /projetos: { id: "1", titulo: "Novo projeto", atividades: [] }
+    - POST /projetos: { id: "1", titulo: "Novo projeto", atividades: ["Fazer Orçamento", "Rever o Inventário", "etc."] }
 
 ### Segunda parte
 
