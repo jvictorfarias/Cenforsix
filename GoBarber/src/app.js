@@ -1,5 +1,21 @@
 import express from 'express';
+import routes from './routes';
 
-const server = express();
+import './database';
 
-server.listen(3333);
+class App {
+  constructor() {
+    this.server = express();
+    this.middlewares();
+    this.routes();
+  }
+
+  // Uso de middlewares globais
+  middlewares() {}
+
+  routes() {
+    this.server.use(routes);
+  }
+}
+
+export default new App().server;
