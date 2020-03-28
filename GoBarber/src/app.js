@@ -11,7 +11,9 @@ class App {
   }
 
   // Uso de middlewares globais
-  middlewares() {}
+  middlewares() {
+    this.server.use(express.json());
+  }
 
   routes() {
     this.server.use(routes);
