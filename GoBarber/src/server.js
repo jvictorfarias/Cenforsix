@@ -1,6 +1,6 @@
 import ora from 'ora';
 import app from './app';
 
-ora('Server running...').start();
-
-app.listen(3333);
+app.listen(3333, () => {
+  ora('Server running...').succeed();
+});
