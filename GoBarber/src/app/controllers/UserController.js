@@ -24,7 +24,7 @@ class UserController {
     }
 
     const { id, name, provider, email, password_hash } = await User.create(
-      req.body
+      req.body,
     );
 
     return res.status(200).json({
@@ -47,13 +47,13 @@ class UserController {
         .min(6)
         .max(30)
         .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+          oldPassword ? field.required() : field,
         ),
       confirmPassword: Yup.string()
         .min(6)
         .max(30)
         .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required().oneOf([Yup.ref('password')]) : field
+          oldPassword ? field.required().oneOf([Yup.ref('password')]) : field,
         ),
     });
 

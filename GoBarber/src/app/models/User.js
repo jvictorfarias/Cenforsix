@@ -13,7 +13,7 @@ class User extends Model {
       },
       {
         sequelize,
-      }
+      },
     );
 
     this.addHook('beforeSave', async user => {
@@ -23,6 +23,10 @@ class User extends Model {
     });
 
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 
   async checkPassword(password) {
