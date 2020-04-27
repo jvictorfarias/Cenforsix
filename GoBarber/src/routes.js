@@ -21,6 +21,11 @@ routes.put('/users', authMiddleware, UserController.update);
 
 // Rotas de providers
 routes.get('/providers', authMiddleware, ProviderController.index);
+routes.get(
+  '/providers/:providerId/available',
+  authMiddleware,
+  AvailableController.index,
+);
 
 // Rotas de agendamentos
 routes.post('/appointments', authMiddleware, AppointmentController.store);
@@ -33,10 +38,6 @@ routes.delete(
 
 // Rota de agendamentos do provedor de serviços
 routes.get('/schedule', authMiddleware, ScheduleController.index);
-
-// Rota para agendamentos disponíveis
-
-routes.get('/available/:providerId', authMiddleware, AvailableController.index);
 
 // Rota de sessão
 routes.post('/session', SessionController.store);
