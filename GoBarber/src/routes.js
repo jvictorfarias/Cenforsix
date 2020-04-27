@@ -9,6 +9,8 @@ import AppointmentController from './app/controllers/AppointmentController';
 
 import authMiddleware from './app/middlewares/auth';
 import multerConfig from './config/multer';
+import ScheduleController from './app/controllers/ScheduleControle';
+import AvailableController from './app/controllers/AvailableController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -23,6 +25,18 @@ routes.get('/providers', authMiddleware, ProviderController.index);
 // Rotas de agendamentos
 routes.post('/appointments', authMiddleware, AppointmentController.store);
 routes.get('/appointments', authMiddleware, AppointmentController.index);
+routes.delete(
+  '/appointments/:id',
+  authMiddleware,
+  AppointmentController.delete,
+);
+
+// Rota de agendamentos do provedor de serviços
+routes.get('/schedule', authMiddleware, ScheduleController.index);
+
+// Rota para agendamentos disponíveis
+
+routes.get('/available/:providerId', authMiddleware, AvailableController.index);
 
 // Rota de sessão
 routes.post('/session', SessionController.store);

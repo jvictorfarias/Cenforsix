@@ -10,7 +10,7 @@ class AppointmentController {
     const appointments = await Appointment.findAll({
       where: { user_id: req.userId, canceled_at: null },
       order: ['date'],
-      attributes: ['id', 'date'],
+      attributes: ['id', 'date', 'past', 'cancelable'],
       include: [
         {
           model: User,
@@ -87,6 +87,39 @@ class AppointmentController {
       provider_id,
       date: parsedDate,
     });
+
+    return res.status(200).json(appointment);
+  }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    if (appointment.user_id !== req.userId) {
+      return res.status(401).json({ error: 'Not authorized' });
+    }
+
+    if (!appointment.cancelable) {
+      return res
+        .status(401)
+        .json({ error: "Can't delete appointment within 2 hours of it" });
+    }
+
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
 
     return res.status(200).json(appointment);
   }
