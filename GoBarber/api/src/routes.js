@@ -9,7 +9,7 @@ import AppointmentController from './app/controllers/AppointmentController';
 
 import authMiddleware from './app/middlewares/auth';
 import multerConfig from './config/multer';
-import ScheduleController from './app/controllers/ScheduleControle';
+import ScheduleController from './app/controllers/ScheduleController';
 import AvailableController from './app/controllers/AvailableController';
 
 const routes = new Router();

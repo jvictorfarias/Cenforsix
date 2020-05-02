@@ -1,19 +1,14 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <>
-      <h1>Hello World</h1>
-      <ul>
-        <li>teste1</li>
-        <li>teste2</li>
-        <li>teste3</li>
-      </ul>
-    </>
-  );
-};
+import history from './services/history';
+
+import Routes from './routes';
+
+const App = () => (
+  <Router history={history}>
+    <Routes />
+  </Router>
+);
 
 export default App;
-
-// React
-// ReactJS - SPA's e React Native
