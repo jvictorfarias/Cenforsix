@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "gobarber",
+      "dialect": "PostgreSQL",
+      "name": "cenforsix",
+      "password": "docker",
+      "port": 5432,
+      "server": "localhost",
+      "username": "postgres"
+    }
+  ]
+}
