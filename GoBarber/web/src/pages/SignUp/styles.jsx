@@ -49,38 +49,6 @@ export const AnimationContainer = styled.div`
     width: 100%;
     max-width: 350px;
     margin-top: 30px;
-
-    input {
-      background: #232129;
-      flex: 1;
-      border-radius: 10px;
-      border: 2px solid #212329;
-      padding: 16px;
-      color: #666360;
-
-      &:focus {
-        border: 2px solid #ff9000;
-      }
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      background: #ff9000;
-      border: 0;
-      font-weight: bold;
-      height: 56px;
-      border-radius: 10px;
-      margin-top: 16px;
-      color: #312e38;
-      transition: background-color 0.2s;
-
-      &:hover {
-        background-color: ${shade(0.2, '#ff9000')};
-      }
-    }
   }
 
   a {
