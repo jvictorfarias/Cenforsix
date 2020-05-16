@@ -1,25 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import api from '../../services/api';
 
+
 import { Container, HeaderContainer, InfoContainer } from './styles';
 
+
 const Details = ({ match }) => {
-  const [deputy, setDeputy] = useState({});
+  const [deputy, setDeputy] = useState({})
 
   const { id } = match.params;
 
   useEffect(() => {
-    api.get(`/deputados/${id}`).then((response) => {
-      setDeputy(response.data.dados.ultimoStatus);
-    });
-  }, [id]);
+    async function loadDeputy() {
+      const { data } = await api.get(`/deputados/${id}`)
+      console.log(data.dados.ultimoStatus)
+      setDeputy(data.dados.ultimoStatus)
+    }
+
+    loadDeputy();
+  }, [])
 
   return (
     <Container>
       <HeaderContainer>
-        <img src={deputy.urlFoto} alt="foto do deputado" />
+        <img src={deputy.urlFoto} alt={deputy.id} />
         <h1>{deputy.nome}</h1>
       </HeaderContainer>
       <InfoContainer>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FiClipboard, FiSearch } from 'react-icons/fi';
@@ -10,6 +10,26 @@ import api from '../../services/api';
 const Home = () => {
   const [deputies, setDeputies] = useState([]);
   const [newDeputy, setnewDeputy] = useState('');
+
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { data } = await api.get('/deputados', {
+          params: {
+            ordem: 'ASC',
+            ordenarPor: 'nome',
+            nome: newDeputy,
+          },
+        });
+        setDeputies([...data.dados]);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    loadData();
+  }, [])
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -32,7 +52,7 @@ const Home = () => {
     <>
       <Container>
         <FiClipboard size={90} />
-        <h1>Citizen Watcher</h1>
+        <h1>Deputy Lookup</h1>
         <form onSubmit={(event) => handleSubmit(event)}>
           <input
             value={newDeputy}
