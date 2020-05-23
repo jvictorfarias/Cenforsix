@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
 
@@ -19,18 +19,13 @@ const Input = ({ name, icon: Icon, ...rest }) => {
     });
   }, [fieldName, registerField]);
 
-  function handleInputFocus() {
-    setIsFocused(true);
-  }
+  const handleInputFocus = useCallback(() => setIsFocused(true), []);
 
-  function handleInputBlur() {
+  const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 
-    // truthy
-    // falsy
-
     setIsFilled(!!inputRef.current.value);
-  }
+  }, []);
 
   return (
     <Container isFocused={isFocused} isFilled={isFilled} isErrored={error}>

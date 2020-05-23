@@ -15,13 +15,20 @@ export const Container = styled.div`
   }
 
   ${props =>
+    props.isFilled &&
+    css`
+      svg {
+        color: #ff9000;
+      }
+    `}
+
+  ${props =>
     props.isErrored &&
     css`
-      border-color: #c53535;
-
       svg {
         color: #c53535;
       }
+      border-color: #c53535;
     `}
 
   ${props =>
@@ -31,13 +38,6 @@ export const Container = styled.div`
         color: #ff9000;
       }
       border-color: #ff9000;
-    `}
-  ${props =>
-    props.isFilled &&
-    css`
-      svg {
-        color: #ff9000;
-      }
     `}
 
 

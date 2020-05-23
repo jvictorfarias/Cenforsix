@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -11,10 +11,12 @@ import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 
+import api from '../../services/api';
+
 const SignIn = () => {
   const formRef = useRef(null);
 
-  async function handleSubmit(data) {
+  const handleSubmit = useCallback(async data => {
     try {
       formRef.current.setErrors({});
 
@@ -24,6 +26,12 @@ const SignIn = () => {
       });
 
       await schema.validate(data, { abortEarly: false });
+
+      const { email, password } = data;
+
+      const user = await api.post('/session', { email, password });
+
+      console.tron.log(user);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const validationErrors = {};
@@ -35,7 +43,7 @@ const SignIn = () => {
         formRef.current.setErrors(validationErrors);
       }
     }
-  }
+  }, []);
 
   return (
     <Container>
