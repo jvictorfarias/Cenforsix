@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
@@ -11,39 +12,41 @@ import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 
-import api from '../../services/api';
+import { signInRequest } from '../../store/modules/auth/actions';
 
 const SignIn = () => {
   const formRef = useRef(null);
+  const dispatch = useDispatch();
 
-  const handleSubmit = useCallback(async data => {
-    try {
-      formRef.current.setErrors({});
+  const handleSubmit = useCallback(
+    async data => {
+      try {
+        formRef.current.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string().email().required(),
-        password: Yup.string().min(6),
-      });
-
-      await schema.validate(data, { abortEarly: false });
-
-      const { email, password } = data;
-
-      const user = await api.post('/session', { email, password });
-
-      console.tron.log(user);
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const validationErrors = {};
-        // Erro de validação
-        err.inner.forEach(error => {
-          validationErrors[error.path] = error.message;
+        const schema = Yup.object().shape({
+          email: Yup.string().email().required(),
+          password: Yup.string().min(6),
         });
 
-        formRef.current.setErrors(validationErrors);
+        await schema.validate(data, { abortEarly: false });
+
+        const { email, password } = data;
+
+        dispatch(signInRequest(email, password));
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const validationErrors = {};
+          // Erro de validação
+          err.inner.forEach(error => {
+            validationErrors[error.path] = error.message;
+          });
+
+          formRef.current.setErrors(validationErrors);
+        }
       }
-    }
-  }, []);
+    },
+    [dispatch],
+  );
 
   return (
     <Container>
