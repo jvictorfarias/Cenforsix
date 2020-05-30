@@ -1,0 +1,66 @@
+{
+  "stock": [
+    {
+      "id": 1,
+      "amount": 3
+    },
+    {
+      "id": 2,
+      "amount": 5
+    },
+    {
+      "id": 3,
+      "amount": 2
+    },
+    {
+      "id": 4,
+      "amount": 1
+    },
+    {
+      "id": 5,
+      "amount": 5
+    },
+    {
+      "id": 6,
+      "amount": 10
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Notebook Samsung Essentials E20 Intel Celeron 4GB 500GB HD LED 15,6'' W10 Cinza",
+      "price": 2314.9,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/img7/01/00/item/134403/7/134403702_1GG.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Smartphone Motorola Moto E6 Plus 64GB Dual Chip Android Pie - 9.0 Tela 6.1”",
+      "price": 1099.9,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/img/420064/4/420064449_1GG.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Smartphone Motorola Moto G7 Play 32GB Dual Chip Android Pie - 9.0 Tela 5.7",
+      "price": 699.0,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/offers/01/00/item/134186/8/134186808_3GG.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Lavadora de Roupas Electrolux 8,5Kg LAC09 - Branca - 110v",
+      "price": 1189.9,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/img7/01/00/item/133240/7/133240729_1GG.png"
+    },
+    {
+      "id": 6,
+      "title": "Smartwatch Y68 - Com Monitor De Pressão Arterial, Freqüência Cardíaca, À Prova D 'Água, Para IOS e Android",
+      "price": 99.9,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/img/1720164/6/1720164695_1GG.jpg"
+    },
+    {
+      "id": 4,
+      "title": "TV Samsumg",
+      "price": 1099.9,
+      "image": "https://images-americanas.b2w.io/produtos/01/00/offers/01/02/item/133791/1/133791184_1GG.png"
+    }
+  ]
+}
