@@ -1,7 +1,18 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
-  return <h1>oi</h1>;
-}
+import Header from './components/Header';
+
+import Routes from './routes';
+
+import GlobalStyle from './styles/global';
+
+const App = () => (
+  <BrowserRouter>
+    <Header />
+    <Routes />
+    <GlobalStyle />
+  </BrowserRouter>
+);
 
 export default App;
