@@ -1,8 +1,11 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FiShoppingBag, FiShoppingCart } from 'react-icons/fi';
 import { Container, Home, Cart } from './styles';
 
-const Header = () => (
+const Header = ({ cartSize }) => (
   <Container>
     <Home to="/">
       <div>
@@ -13,11 +16,19 @@ const Header = () => (
     <Cart to="/cart">
       <div>
         <strong>Meu carrinho</strong>
-        <span>3 itens</span>
+        <span>{cartSize} itens</span>
       </div>
       <FiShoppingCart size={40} color="#f8f8f2" />
     </Cart>
   </Container>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  cartSize: state.cart.length,
+});
+
+export default connect(mapStateToProps)(Header);
+
+Header.propTypes = {
+  cartSize: PropTypes.number.isRequired,
+};

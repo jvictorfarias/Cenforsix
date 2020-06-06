@@ -2,12 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 import { FiShoppingCart } from 'react-icons/fi';
 
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addToCart } from '../../store/modules/Cart/actions';
 import { ProductList, Product } from './styles';
 import { formatPrice } from '../../utils/format';
 import api from '../../services/api';
 
-const Home = ({ dispatch }) => {
+const Home = ({ amount, dispatch }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -23,10 +25,7 @@ const Home = ({ dispatch }) => {
 
   const handleClickButton = useCallback(
     (product) => {
-      dispatch({
-        type: 'ADD_TO_CART',
-        product,
-      });
+      dispatch(addToCart(product));
     },
     [dispatch],
   );
@@ -41,7 +40,7 @@ const Home = ({ dispatch }) => {
 
           <button type="button" onClick={() => handleClickButton(product)}>
             <div>
-              <FiShoppingCart size={18} /> 3
+              <FiShoppingCart size={18} /> {amount[product.id] || 0}
             </div>
             <span>Adicionar ao carrinho</span>
           </button>
@@ -51,4 +50,19 @@ const Home = ({ dispatch }) => {
   );
 };
 
-export default connect()(Home);
+const mapStateToProps = (state) => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
+export default connect(mapStateToProps)(Home);
+
+Home.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  amount: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+  }).isRequired,
+};
