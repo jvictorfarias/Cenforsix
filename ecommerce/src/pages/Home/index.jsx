@@ -4,7 +4,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addToCart } from '../../store/modules/Cart/actions';
+import { addToCartRequest } from '../../store/modules/Cart/actions';
 import { ProductList, Product } from './styles';
 import { formatPrice } from '../../utils/format';
 import api from '../../services/api';
@@ -24,8 +24,8 @@ const Home = ({ amount, dispatch }) => {
   }, []);
 
   const handleClickButton = useCallback(
-    (product) => {
-      dispatch(addToCart(product));
+    (id) => {
+      dispatch(addToCartRequest(id));
     },
     [dispatch],
   );
@@ -38,7 +38,7 @@ const Home = ({ amount, dispatch }) => {
           <strong>{product.title}</strong>
           <span>{product.formattedPrice}</span>
 
-          <button type="button" onClick={() => handleClickButton(product)}>
+          <button type="button" onClick={() => handleClickButton(product.id)}>
             <div>
               <FiShoppingCart size={18} /> {amount[product.id] || 0}
             </div>

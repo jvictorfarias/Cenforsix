@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const cart = (state = [], action) => {
   switch (action.type) {
-    case '@cart/ADD_PRODUCT':
+    case '@cart/ADD_SUCCESS':
       return produce(state, (draft) => {
         const { product } = action;
 
