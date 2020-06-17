@@ -1,8 +1,9 @@
 import { select, call, put, all, takeLatest } from 'redux-saga/effects';
 import api from '../../../services/api';
 import { formatPrice } from '../../../utils/format';
+import { toast } from 'react-toastify';
 
-import { addToCartSuccess } from '../Cart/actions'
+import { addToCartSuccess, updateAmountSuccess } from '../Cart/actions'
 
 function* addToCart({ id }) {
   const productExists = yield select((state) =>
@@ -16,13 +17,13 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > amountStock) {
-    console.tron.warn('Insuficient quantity')
+    toast.error('Insuficient stock quantity.')
     return;
   }
 
 
   if (productExists) {
-    console.log('oi')
+    yield put(updateAmountSuccess(id, amount))
   } else {
     const { data } = yield call(api.get, `/products/${id}`);
 
@@ -39,6 +40,20 @@ function* addToCart({ id }) {
 
 }
 
+function* updateAmount({ id, amount }) {
+  if (amount <= 0) return;
+
+  const { data: { amount: stockAmount } } = yield call(api.get, `/stock/${id}`);
+
+  if (amount > stockAmount) {
+    toast.error('Insuficient quantity')
+    return;
+  }
+
+  yield put(updateAmountSuccess(id, amount))
+}
+
 export default all([
-  takeLatest('@cart/ADD_REQUEST', addToCart)
+  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_REQUEST', updateAmount)
 ])

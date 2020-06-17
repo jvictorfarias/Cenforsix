@@ -3,21 +3,21 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FiPlusCircle, FiMinusCircle, FiDelete } from 'react-icons/fi';
-import { removeFromCart, updateAmount } from '../../store/modules/Cart/actions';
+import { removeFromCart, updateAmountRequest } from '../../store/modules/Cart/actions';
 import { Container, ProductTable, Control, Total } from './styles';
 import { formatPrice } from '../../utils/format';
 
 const Cart = ({ cart, total, dispatch }) => {
   const increment = useCallback(
     (product) => {
-      dispatch(updateAmount(product.id, product.amount + 1));
+      dispatch(updateAmountRequest(product.id, product.amount + 1));
     },
     [dispatch],
   );
 
   const decrement = useCallback(
     (product) => {
-      dispatch(updateAmount(product.id, product.amount - 1));
+      dispatch(updateAmountRequest(product.id, product.amount - 1));
     },
     [dispatch],
   );
