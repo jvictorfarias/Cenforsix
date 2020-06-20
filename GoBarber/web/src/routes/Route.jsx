@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route as RouteDOM, Redirect } from 'react-router-dom';
 
-const Route = ({ component: Component, isPrivate, ...rest }) => {
-  const signed = false;
+import { store } from '../store';
+
+const Route = ({ component: Component, isPrivate = false, ...rest }) => {
+  const { signed } = store.getState().auth;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -13,7 +15,7 @@ const Route = ({ component: Component, isPrivate, ...rest }) => {
     return <Redirect to="/dashboard" />;
   }
 
-  return <RouteDOM {...rest} component={Component} />;
+  return <RouteDOM {...rest} render={props => <Component {...props} />} />;
 };
 
 export default Route;

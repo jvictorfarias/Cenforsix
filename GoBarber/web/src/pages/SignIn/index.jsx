@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
@@ -17,6 +17,7 @@ import { signInRequest } from '../../store/modules/auth/actions';
 const SignIn = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.auth);
 
   const handleSubmit = useCallback(
     async data => {
@@ -67,7 +68,9 @@ const SignIn = () => {
               type="password"
               placeholder="Senha"
             />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">
+              {loading ? 'Carregando...' : 'Entrar'}
+            </Button>
           </Form>
           <Link to="/register">
             <FiLogIn />

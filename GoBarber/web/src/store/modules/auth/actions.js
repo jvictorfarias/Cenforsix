@@ -16,6 +16,19 @@ export const signInSuccess = (user, token) => {
   };
 };
 
+export const signUpRequest = (name, email, password) => {
+  return {
+    type: '@auth/SIGN_UP_REQUEST',
+    payload: { name, email, password },
+  };
+};
+
+export const signOutRequest = () => {
+  return {
+    type: '@auth/SIGN_OUT_REQUEST',
+  };
+};
+
 export const signInFailure = () => {
   return {
     type: '@auth/SIGN_IN_FAILURE',
