@@ -3,7 +3,7 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 
-import { signInSuccess } from './actions';
+import { signInSuccess, signInFailure } from './actions';
 import history from '../../../services/history';
 
 // Atua como middleware
@@ -26,6 +26,7 @@ export function* signIn({ payload }) {
     history.push('/dashboard');
   } catch (error) {
     toast.error('Erro na autenticação, verifique suas credenciais.');
+    yield put(signInFailure());
   }
 }
 
@@ -46,7 +47,21 @@ export function* signUp({ payload }) {
   }
 }
 
+export function signOut() {
+  history.push('/');
+}
+
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  api.defaults.headers.Authorization = `Bearer ${token}`;
+}
+
 export default all([
+  takeLatest('@auth/SIGN_OUT', signOut),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('persist/REHYDRATE', setToken),
 ]);

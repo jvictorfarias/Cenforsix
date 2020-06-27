@@ -34,3 +34,9 @@ export const signInFailure = () => {
     type: '@auth/SIGN_IN_FAILURE',
   };
 };
+
+export const signOut = () => {
+  return {
+    type: '@auth/SIGN_OUT',
+  };
+};
