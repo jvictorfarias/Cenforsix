@@ -8,7 +8,7 @@ import logoImg from '../../assets/logo.svg';
 import { signOut } from '../../store/modules/auth/actions';
 
 const Header = () => {
-  const { profile } = useSelector(state => state.user);
+  const { profile } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (

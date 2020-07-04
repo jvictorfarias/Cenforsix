@@ -7,12 +7,20 @@ const INITIAL_STATE = {
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case '@auth/SIGN_IN_SUCCESS':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.profile = action.payload.user;
       });
     case '@auth/SIGN_OUT':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.profile = null;
+      });
+    case '@user/UPDATE_PROFILE_SUCCESS':
+      return produce(state, (draft) => {
+        draft.profile = action.payload.data;
+      });
+    case '@user/UPDATE_AVATAR_SUCCESS':
+      return produce(state, (draft) => {
+        draft.profile.avatar.url = action.payload.url;
       });
     default:
       return state;
