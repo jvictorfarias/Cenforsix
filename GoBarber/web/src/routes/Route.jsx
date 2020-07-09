@@ -15,7 +15,7 @@ const Route = ({ component: Component, isPrivate = false, ...rest }) => {
     return <Redirect to="/dashboard" />;
   }
 
-  return <RouteDOM {...rest} render={props => <Component {...props} />} />;
+  return <RouteDOM {...rest} render={(props) => <Component {...props} />} />;
 };
 
 export default Route;

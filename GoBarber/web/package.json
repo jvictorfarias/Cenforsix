@@ -9,6 +9,8 @@
     "@unform/core": "^2.1.0",
     "@unform/web": "^2.1.0",
     "axios": "^0.19.2",
+    "date-fns": "^2.14.0",
+    "date-fns-tz": "^1.0.10",
     "history": "^4.10.1",
     "immer": "^6.0.8",
     "polished": "^3.5.2",
