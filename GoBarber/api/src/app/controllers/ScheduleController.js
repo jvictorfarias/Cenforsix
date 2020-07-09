@@ -1,6 +1,7 @@
 import { parseISO, startOfDay, endOfDay } from 'date-fns';
 import { Op } from 'sequelize';
 import User from '../models/User';
+import File from '../models/File';
 import Appointment from '../models/Appointment';
 
 class ScheduleController {
@@ -13,8 +14,8 @@ class ScheduleController {
       return res.status(401).json({ error: 'Invalid provider' });
     }
 
-    const { data } = req.query;
-    const parsedDate = parseISO(data);
+    const { date } = req.query;
+    const parsedDate = parseISO(date);
 
     /**
      * ? 2020-04-27T22:00:00:00
@@ -34,6 +35,13 @@ class ScheduleController {
           model: User,
           as: 'user',
           attributes: ['name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['path', 'url'],
+            },
+          ],
         },
       ],
       order: ['date'],

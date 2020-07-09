@@ -24,16 +24,13 @@ class UserController {
       return res.status(401).json({ error: 'User email already exists' });
     }
 
-    const { id, name, provider, email, password_hash } = await User.create(
-      req.body,
-    );
+    const { id, name, provider, email } = await User.create(req.body);
 
     return res.status(200).json({
       id,
       name,
       email,
       provider,
-      password_hash,
     });
   }
 
@@ -50,7 +47,7 @@ class UserController {
         .when('oldPassword', (oldPassword, field) =>
           oldPassword ? field.required() : field,
         ),
-      confirmPassword: Yup.string()
+      passwordConfirmation: Yup.string()
         .min(6)
         .max(30)
         .when('oldPassword', (oldPassword, field) =>
@@ -90,14 +87,6 @@ class UserController {
     });
 
     return res.status(200).json({ id, name, email, avatar });
-  }
-
-  async show(req, res) {
-    return res.json({ ok: true });
-  }
-
-  async delete(req, res) {
-    return res.json({ ok: true });
   }
 }
 
