@@ -13,14 +13,15 @@ import Button from '../../components/Button';
 import { Container, Content, AnimationContainer, Background } from './styles';
 
 import { signUpRequest } from '../../store/modules/auth/actions';
+import Radio from '../../components/Radio';
 
 const SignUp = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.auth);
+  const { loading } = useSelector((state) => state.auth);
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data) => {
       try {
         formRef.current.setErrors({});
 
@@ -28,18 +29,19 @@ const SignUp = () => {
           name: Yup.string().required(),
           email: Yup.string().email().required(),
           password: Yup.string().min(6),
+          provider: Yup.bool().required(),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        const { name, email, password } = data;
+        const { name, email, password, provider } = data;
 
-        dispatch(signUpRequest(name, email, password));
+        dispatch(signUpRequest(name, email, password, provider));
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const validationErrors = {};
 
-          err.inner.forEach(error => {
+          err.inner.forEach((error) => {
             validationErrors[error.path] = error.message;
           });
 
@@ -57,7 +59,11 @@ const SignUp = () => {
         <AnimationContainer>
           <img src={logoImg} alt="logo" />
           <h1>Faça seu cadastro</h1>
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <Form
+            ref={formRef}
+            initialData={{ provider: true }}
+            onSubmit={handleSubmit}
+          >
             <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
             <Input
               name="email"
@@ -70,6 +76,13 @@ const SignUp = () => {
               icon={FiLock}
               type="password"
               placeholder="Senha"
+            />
+            <Radio
+              name="provider"
+              options={[
+                { id: true, label: 'Provedor' },
+                { id: false, label: 'Cliente' },
+              ]}
             />
             <Button type="submit">
               {loading ? 'Carregando...' : 'Cadastrar'}

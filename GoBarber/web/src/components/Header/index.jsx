@@ -16,13 +16,16 @@ const Header = () => {
       <HeaderContent>
         <img src={logoImg} alt="logo" />
         <Profile>
-          <img
-            src={
-              profile.avatar.url ||
-              'https://api.adorable.io/avatars/285/abott@adorable.png'
-            }
-            alt="avatar"
-          />
+          <Link to="/dashboard">
+            <img
+              src={
+                profile.avatar
+                  ? profile.avatar.url
+                  : 'https://api.adorable.io/avatars/285/abott@adorable.png'
+              }
+              alt="avatar"
+            />
+          </Link>
           <Info>
             <span>Bem-vindo(a), </span>
             <Link to="/profile">

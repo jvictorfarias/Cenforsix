@@ -32,12 +32,13 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { name, email, password, provider } = payload;
 
     yield call(api.post, 'users', {
       name,
       email,
       password,
+      provider,
     });
 
     toast.success('Usuário criado com sucesso');

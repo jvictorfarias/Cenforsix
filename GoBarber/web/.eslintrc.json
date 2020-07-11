@@ -28,6 +28,7 @@
     "prettier"
   ],
   "rules": {
+    "no-return-assign": "off",
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [

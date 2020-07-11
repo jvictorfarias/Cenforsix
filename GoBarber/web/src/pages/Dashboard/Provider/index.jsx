@@ -15,11 +15,11 @@ import {
 } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import ptBR from 'date-fns/locale/pt';
-import Header from '../../components/Header';
+import Header from '../../../components/Header';
 
 import { Container, Time, Appointment, AppointmentData } from './styles';
-import schedule from '../../helpers/providerSchedule';
-import api from '../../services/api';
+import schedule from '../../../helpers/providerSchedule';
+import api from '../../../services/api';
 
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
@@ -98,8 +98,9 @@ const Dashboard = () => {
                   {appointment && (
                     <img
                       src={
-                        appointment.user.avatar.url ||
-                        'https://api.adorable.io/avatars/285/abott@adorable.png'
+                        appointment.user.avatar
+                          ? appointment.user.avatar.url
+                          : 'https://api.adorable.io/avatars/285/abott@adorable.png'
                       }
                       alt={appointment.user.name}
                     />

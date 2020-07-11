@@ -16,10 +16,10 @@ export const signInSuccess = (user, token) => {
   };
 };
 
-export const signUpRequest = (name, email, password) => {
+export const signUpRequest = (name, email, password, provider) => {
   return {
     type: '@auth/SIGN_UP_REQUEST',
-    payload: { name, email, password },
+    payload: { name, email, password, provider },
   };
 };
 
