@@ -1,7 +1,9 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  profile: null,
+  profile: {
+    provider: null,
+  },
 };
 
 const user = (state = INITIAL_STATE, action) => {
@@ -12,7 +14,7 @@ const user = (state = INITIAL_STATE, action) => {
       });
     case '@auth/SIGN_OUT':
       return produce(state, (draft) => {
-        draft.profile = null;
+        draft.profile = { provider: null };
       });
     case '@user/UPDATE_PROFILE_SUCCESS':
       return produce(state, (draft) => {
