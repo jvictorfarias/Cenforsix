@@ -4,9 +4,11 @@ import { FiXCircle } from 'react-icons/fi';
 import { parseISO, formatRelative } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { Container, Time, Appointment, AppointmentData } from './styles';
+import history from '../../../services/history';
 import Header from '../../../components/Header';
 
 import api from '../../../services/api';
+import Button from '../../../components/Button';
 
 const UserDashboard = () => {
   const [appointments, setAppointments] = useState([]);
@@ -82,6 +84,9 @@ const UserDashboard = () => {
                 </Time>
               ),
           )}
+          <Button onClick={() => history.push('/providers')}>
+            Criar agendamento
+          </Button>
         </ul>
       </Container>
     </>
