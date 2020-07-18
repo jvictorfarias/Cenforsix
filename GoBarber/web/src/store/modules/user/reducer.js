@@ -12,9 +12,9 @@ const user = (state = INITIAL_STATE, action) => {
       return produce(state, (draft) => {
         draft.profile = action.payload.user;
       });
-    case '@auth/SIGN_OUT':
+    case '@auth/SIGN_OUT_REQUEST':
       return produce(state, (draft) => {
-        draft.profile = { provider: null };
+        draft.profile = INITIAL_STATE;
       });
     case '@user/UPDATE_PROFILE_SUCCESS':
       return produce(state, (draft) => {

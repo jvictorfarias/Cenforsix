@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Container, HeaderContent, Profile, Info } from './styles';
 
 import logoImg from '../../assets/logo.svg';
-import { signOut } from '../../store/modules/auth/actions';
+import { signOutRequest } from '../../store/modules/auth/actions';
 
 const Header = () => {
   const { profile } = useSelector((state) => state.user);
@@ -34,7 +34,7 @@ const Header = () => {
           </Info>
         </Profile>
 
-        <button onClick={() => dispatch(signOut())} type="button">
+        <button onClick={() => dispatch(signOutRequest())} type="button">
           <FiPower />
         </button>
       </HeaderContent>

@@ -9,21 +9,21 @@ const INITIAL_STATE = {
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case '@auth/SIGN_IN_REQUEST':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.loading = true;
       });
     case '@auth/SIGN_IN_SUCCESS':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.token = action.payload.token;
         draft.loading = false;
         draft.signed = true;
       });
     case '@auth/SIGN_FAILURE':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.loading = false;
       });
-    case '@auth/SIGN_OUT':
-      return produce(state, draft => {
+    case '@auth/SIGN_OUT_REQUEST':
+      return produce(state, (draft) => {
         draft.token = null;
         draft.signed = false;
         draft.loading = false;

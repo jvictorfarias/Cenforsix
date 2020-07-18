@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 import File from '../models/File';
+import MailProvider from '../providers/MailProvider';
 
 class UserController {
   async store(req, res) {
@@ -25,6 +26,11 @@ class UserController {
     }
 
     const { id, name, provider, email } = await User.create(req.body);
+
+    await MailProvider.sendMail({ name, email }, 'Bem-Vindo(a) ao GoBarber', {
+      name,
+      email,
+    });
 
     return res.status(200).json({
       id,
